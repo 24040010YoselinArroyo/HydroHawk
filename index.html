@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HydroHawk | Bienvenida</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 1s ease forwards;
+    }
+
+    .fade-delay-1 { animation-delay: 0.3s; }
+    .fade-delay-2 { animation-delay: 0.6s; }
+    .fade-delay-3 { animation-delay: 0.9s; }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen overflow-hidden bg-black text-white">
+  <div class="relative w-full h-screen">
+    <video
+      id="introVideo"
+      class="absolute inset-0 w-full h-full object-cover"
+      autoplay
+      muted
+      loop
+      playsinline
+    >
+      <source src="assets/video/intro.mp4" type="video/mp4">
+      Tu navegador no soporta video HTML5.
+    </video>
+
+    <div class="absolute inset-0 bg-slate-950/55"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,165,233,.20),transparent_30%),linear-gradient(to_bottom,rgba(2,6,23,.35),rgba(2,6,23,.72))]"></div>
+
+    <div class="relative z-10 h-full flex items-center justify-center px-4">
+      <div class="max-w-3xl text-center">
+        <img
+          src="assets/img/logo.png"
+          alt="Logo HydroHawk"
+          class="fade-in mx-auto w-28 h-28 md:w-36 md:h-36 object-contain drop-shadow-2xl"
+        >
+
+        <p class="fade-in fade-delay-1 mt-6 text-sky-300 uppercase tracking-[0.3em] text-xs sm:text-sm font-semibold">
+          HydroHawk
+        </p>
+
+        <h1 class="fade-in fade-delay-2 mt-4 text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight">
+          Sistema inteligente de riego automatizado
+        </h1>
+
+        <p class="fade-in fade-delay-2 mt-5 text-slate-200 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
+          Bienvenido al portal del proyecto. Explora nuestra propuesta tecnológica,
+          el reporte, el tríptico y la vista completa del sistema.
+        </p>
+
+        <div class="fade-in fade-delay-3 mt-8 flex items-center justify-center gap-4 flex-wrap">
+          <a
+            href="panel.html"
+            class="px-7 py-3 rounded-2xl bg-gradient-to-r from-blue-600 to-sky-500 hover:from-blue-700 hover:to-sky-600 transition text-white font-semibold shadow-2xl"
+          >
+            Ver panel
+          </a>
+
+          <button
+            id="soundBtn"
+            class="px-7 py-3 rounded-2xl border border-white/25 bg-white/10 hover:bg-white/15 transition font-semibold"
+          >
+            Activar sonido
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const video = document.getElementById("introVideo");
+    const soundBtn = document.getElementById("soundBtn");
+
+    soundBtn.addEventListener("click", async () => {
+      try {
+        video.muted = !video.muted;
+
+        if (video.paused) {
+          await video.play();
+        }
+
+        soundBtn.textContent = video.muted ? "Activar sonido" : "Quitar sonido";
+      } catch (error) {
+        console.error("No se pudo cambiar el audio del video:", error);
+      }
+    });
+  </script>
+</body>
+</html>
